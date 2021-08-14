@@ -9,6 +9,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 
+from sqlalchemy.sql.sqltypes import Integer
+
 DATABASE_URL ="postgres://ttcaoeqqllfegc:6a6ce83beff944fd12d8a8512e5b74c2ab3e7b6810718e4106939dbe6232298c@ec2-3-217-68-126.compute-1.amazonaws.com:5432/dcedsrjffik858"
 
 
@@ -34,11 +36,11 @@ empleado = sqlalchemy.Table(
     sqlalchemy.Column("nombre",sqlalchemy.String),
     sqlalchemy.Column("apellido",sqlalchemy.String),
     sqlalchemy.Column("direccion",sqlalchemy.String),
-    sqlalchemy.Column("telefono",sqlalchemy.Integer),
-    sqlalchemy.Column("salario",sqlalchemy.Integer),
-    sqlalchemy.Column("porcentaje_comision_ventas",sqlalchemy.Integer),
-    sqlalchemy.Column("edad",sqlalchemy.Integer),
-    sqlalchemy.Column("telefono",sqlalchemy.Integer),
+    sqlalchemy.Column("telefono",sqlalchemy.String),
+    sqlalchemy.Column("salario",sqlalchemy.String),
+    sqlalchemy.Column("porcentaje_comision_ventas",sqlalchemy.String),
+    sqlalchemy.Column("edad",sqlalchemy.String),
+    sqlalchemy.Column("telefono",sqlalchemy.String),
     sqlalchemy.Column("status",sqlalchemy.Boolean),
 
 )
@@ -93,11 +95,11 @@ class EmpleadoIn(BaseModel):
     apellido:str
     status: bool
     direccion:str
-    telefono:int
-    salario:int
-    porcentaje_comision_ventas:int
-    edad:int
-    telefono:int
+    telefono:str
+    salario:str
+    porcentaje_comision_ventas:str
+    edad:str
+    telefono:str
 
 class Empleado(BaseModel):
     id: int
@@ -105,11 +107,11 @@ class Empleado(BaseModel):
     apellido:str
     status: bool
     direccion:str
-    telefono:int
-    salario:int
-    porcentaje_comision_ventas:int
-    edad:int
-    telefono:int
+    telefono:str
+    salario:str
+    porcentaje_comision_ventas:str
+    edad:str
+    telefono:str
 
 
 
@@ -136,7 +138,7 @@ async def shutdown():
 
 @app.post("/empleados/",response_model=Empleado)
 async def create_empleado(emp:EmpleadoIn):
-    query= empleado.insert().values(nombre=emp.nombre,apellido=emp.apellido, status=emp.status)
+    query= empleado.insert().values(nombre=emp.nombre,apellido=emp.apellido, status=emp.status, direccion=emp.direccion, telefono=emp.telefono, salario=emp.salario, porcentaje_comision_ventas=emp.porcentaje_comision_ventas, edad=emp.edad, telefono=emp.telefono)
     
     last_record_id =await database.execute(query)
     return {**emp.dict(), "id":last_record_id}
@@ -162,6 +164,12 @@ async def del_empleado(emp_id: int):
 
 @app.put("/empleadoUpdate/{emp_id}",response_model=Empleado)
 async def setEmpleadoId(emp_id: int,emp:EmpleadoIn):
-    query = empleado.update().where(empleado.c.id==emp_id).values(nombre=emp.nombre, apellido=emp.apellido,status=emp.status)
+    query = empleado.update().where(empleado.c.id==emp_id).values(nombre=emp.nombre, apellido=emp.apellido,status=emp.status, direccion=emp.direccion, telefono=emp.telefono, salario=emp.salario, porcentaje_comision_ventas=emp.porcentaje_comision_ventas, edad=emp.edad, telefono=emp.telefono )
     await database.execute(query)
     return {**emp.dict(),"id":emp_id}
+
+
+
+############################################## tabla cliente
+
+
