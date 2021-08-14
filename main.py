@@ -52,8 +52,8 @@ cliente = sqlalchemy.Table(
     sqlalchemy.Column("nombre",sqlalchemy.String),
     sqlalchemy.Column("apellido",sqlalchemy.String),
     sqlalchemy.Column("direccion",sqlalchemy.String),
-    sqlalchemy.Column("telefono",sqlalchemy.Boolean),
-    sqlalchemy.Column("correo",sqlalchemy.Boolean),
+    sqlalchemy.Column("telefono",sqlalchemy.String),
+    sqlalchemy.Column("correo",sqlalchemy.String),
     sqlalchemy.Column("status",sqlalchemy.Boolean),
 )
 
@@ -170,6 +170,9 @@ async def setEmpleadoId(emp_id: int,emp:EmpleadoIn):
 
 
 
-############################################## tabla cliente
+
+
+
+
 
 
