@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 
-#DATABASE_URL ="postgres://tpyhijbyfelsmz:026d7c67491a81879fa260e56b4acaa546a339566e63d47361d2ccd5d97f7c0c@ec2-44-196-250-191.compute-1.amazonaws.com:5432/dchktpv0ipqvgi"
+DATABASE_URL ="postgres://ttcaoeqqllfegc:6a6ce83beff944fd12d8a8512e5b74c2ab3e7b6810718e4106939dbe6232298c@ec2-3-217-68-126.compute-1.amazonaws.com:5432/dcedsrjffik858"
 
 
  
@@ -21,7 +21,7 @@ db_username= urllib.parse.quote_plus(str(os.environ.get('db_username','postgres'
 db_password= urllib.parse.quote_plus(str(os.environ.get('db_password','123456')))
 ssl_mode= urllib.parse.quote_plus(str(os.environ.get('ssl_mode','prefer')))
 
-DATABASE_URL= 'postgresql://{}:{}@{}:{}/{}?sslmode={}'.format(db_username, db_password, host_server,db_server_port, database_name, ssl_mode)
+#DATABASE_URL= 'postgresql://{}:{}@{}:{}/{}?sslmode={}'.format(db_username, db_password, host_server,db_server_port, database_name, ssl_mode)
 database = databases.Database(DATABASE_URL)
 
 metadata = sqlalchemy.MetaData()
