@@ -92,12 +92,24 @@ class EmpleadoIn(BaseModel):
     nombre:str
     apellido:str
     status: bool
+    direccion:str
+    telefono:int
+    salario:int
+    porcentaje_comision_ventas:int
+    edad:int
+    telefono:int
 
 class Empleado(BaseModel):
     id: int
     nombre:str
     apellido:str
     status: bool
+    direccion:str
+    telefono:int
+    salario:int
+    porcentaje_comision_ventas:int
+    edad:int
+    telefono:int
 
 
 
