@@ -138,7 +138,7 @@ async def shutdown():
 
 @app.post("/empleados/",response_model=Empleado)
 async def create_empleado(emp:EmpleadoIn):
-    query= empleado.insert().values(nombre=emp.nombre,apellido=emp.apellido, status=emp.status)
+    query= empleado.insert().values(nombre=emp.nombre, apellido=emp.apellido, status=emp.status, direccion=emp.direccion, telefono=emp.telefono, salario=emp.salario, porcentaje_comision_ventas=emp.porcentaje_comision_ventas, edad=emp.edad, telefono=emp.telefono)
     
     last_record_id =await database.execute(query)
     return {**emp.dict(), "id":last_record_id}
@@ -164,7 +164,7 @@ async def del_empleado(emp_id: int):
 
 @app.put("/empleadoUpdate/{emp_id}",response_model=Empleado)
 async def setEmpleadoId(emp_id: int,emp:EmpleadoIn):
-    query = empleado.update().where(empleado.c.id==emp_id).values(nombre=emp.nombre, apellido=emp.apellido,status=emp.status)
+    query = empleado.update().where(empleado.c.id==emp_id).values(nombre=emp.nombre, apellido=emp.apellido,status=emp.status, direccion=emp.direccion, telefono=emp.telefono, salario=emp.salario, porcentaje_comision_ventas=emp.porcentaje_comision_ventas, edad=emp.edad, telefono=emp.telefono)
     await database.execute(query)
     return {**emp.dict(),"id":emp_id}
 
